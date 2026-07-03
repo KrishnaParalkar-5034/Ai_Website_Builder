@@ -33,3 +33,7 @@ Thumbs.db
 # Build output
 dist/
 build/
+
+# Installers
+*.exe
+*.msi
