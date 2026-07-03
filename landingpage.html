@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Site Builder – Home</title>
+  <meta name="description"
+    content="Turn your ideas into stunning websites in seconds with AI Site Builder. No code, no limits." />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      color: #fff;
+      background: radial-gradient(circle at center, #6d28d9, #000 70%);
+      overflow-x: hidden;
+    }
+
+    /* ANIMATED BACKGROUND GLOW */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.35), transparent 60%);
+      animation: glowMove 12s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes glowMove {
+      0% {
+        transform: translate(-10%, -10%);
+      }
+
+      50% {
+        transform: translate(10%, 10%);
+      }
+
+      100% {
+        transform: translate(-10%, -10%);
+      }
+    }
+
+    /* NAVBAR */
+    .navbar-custom {
+      background: #1e1730;
+      padding: 0.85rem 2rem;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff !important;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .brand-icon {
+      color: #f5a623;
+      font-size: 18px;
+    }
+
+    .navbar-custom .nav-link {
+      color: rgba(255, 255, 255, 0.75) !important;
+      font-size: 15px;
+      font-weight: 400;
+      padding: 0.4rem 1rem !important;
+      transition: color 0.2s;
+    }
+
+    .navbar-custom .nav-link:hover,
+    .navbar-custom .nav-link.active {
+      color: #ffffff !important;
+    }
+
+    .btn-get-started {
+      background: #7c4dff;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 9px 24px;
+      border-radius: 8px;
+      border: none;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-get-started:hover {
+      background: #9166ff;
+      color: #fff;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 110px 20px;
+      animation: floatIn 1.2s ease forwards;
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      line-height: 1.2;
+      max-width: 900px;
+      margin: auto auto 20px;
+      background: linear-gradient(180deg, #fff, #c7b9ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #cfcfcf;
+      max-width: 700px;
+      margin: auto auto 50px;
+    }
+
+    /* GLASS INPUT */
+    .ai-box {
+      max-width: 720px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      gap: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: box-shadow 0.4s ease;
+      justify-content: center;
+    }
+
+    .ai-box:focus-within {
+      box-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
+    }
+
+    /* CTA BUTTON */
+    .ai-box button {
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      border: none;
+      padding: 14px 22px;
+      border-radius: 12px;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.35s ease;
+    }
+
+    .ai-box button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.9);
+    }
+
+    /* STEPS SECTION */
+    .steps-section {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .steps-section h1 {
+      font-size: 42px;
+      line-height: 1.2;
+      max-width: 900px;
+      margin: auto auto 20px;
+      background: linear-gradient(180deg, #fff, #c7b9ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .steps-section p {
+      font-size: 18px;
+      color: #cfcfcf;
+      max-width: 700px;
+      margin: auto auto 40px;
+    }
+
+    .step-card .card {
+      border: none;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .step-card .card-body {
+      background: radial-gradient(circle at center, #6d28d9, #000 70%);
+      padding: 2rem;
+      min-height: 180px;
+    }
+
+    .step-card .card-body h5 {
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .step-card .card-body p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* FAQ SECTION */
+    .faq-section {
+      padding: 60px 0;
+    }
+
+    .faq-section h2 {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .accordion-item {
+      background: #1a1a2e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px !important;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .accordion-button {
+      background: #1a1a2e;
+      color: #e8e6f0;
+      font-weight: 500;
+    }
+
+    .accordion-button:not(.collapsed) {
+      background: #7c4dff;
+      color: #ffffff;
+      box-shadow: none;
+    }
+
+    .accordion-button:focus {
+      box-shadow: none;
+      border-color: transparent;
+    }
+
+    .accordion-button:not(.collapsed)::after {
+      filter: brightness(0) invert(1);
+    }
+
+    .accordion-body {
+      background: #16162a;
+      color: rgba(232, 230, 240, 0.6);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .steps-section h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand" href="#">
+        <span class="brand-icon">⚡</span>
+        SiteBuilder
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="landingpage.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">My Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="community.html">Community</a></li>
+          <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link" href="Aboutus.html">About Us</a></li>
+        </ul>
+      </div>
+
+      <a href="login.html" class="btn-get-started d-none d-lg-block">Get started</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Turn thoughts into websites<br>instantly, with AI.</h1>
+    <p>Create, customize and publish websites faster than ever with our AI Site Builder.</p>
+    <div class="ai-box">
+      <a href="index.html" data-auth-link="builder" style="text-decoration:none;">
+        <button>Create with AI</button>
+      </a>
+    </div>
+  </section>
+
+  <!-- STEPS SECTION -->
+  <section class="steps-section">
+    <h1>Build a professional website in 3 simple steps</h1>
+    <p>Building your dream website with our AI website generator is a breeze!</p>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 my-3 step-card">
+          <div class="card">
+            <div class="card-body">
+              <h5>1. Describe your website</h5>
+              <p>Write a simple prompt that describes the type of site you want created.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 my-3 step-card">
+          <div class="card">
+            <div class="card-body">
+              <h5>2. Generate your website</h5>
+              <p>Our AI instantly builds your website, including the layout and content.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-sm-6 my-3 step-card">
+          <div class="card">
+            <div class="card-body">
+              <h5>3. Customize and publish</h5>
+              <p>Tweak details like colors and text, and go live with a responsive site in minutes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section py-5">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="accordion" id="faqAccordion">
+
+        <!-- Question 1 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+              What is an AI website builder?
+            </button>
+          </h2>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              An AI website builder uses artificial intelligence to generate layouts, pages, copy, images, and design
+              systems automatically. Instead of manually building pages, you describe what you want and AI creates the
+              entire website for you.
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+              How does an AI website builder work?
+            </button>
+          </h2>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              AI takes your prompt, business info, screenshots, or URLs, analyzes the structure and design patterns, and
+              produces a fully responsive website. You can refine everything visually—no coding required.
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+              Should I use an AI website builder or hire a developer?
+            </button>
+          </h2>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Use an AI website builder like SiteBuilder if you need to launch fast, have a limited budget, or want to
+              manage updates yourself without technical help. Consider hiring a developer if you need complex custom
+              logic or deep integrations with internal systems. For most business, landing, and portfolio websites, an
+              AI website builder gives you everything you need at a fraction of the time and cost.
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+              Can I create a website without knowing how to code?
+            </button>
+          </h2>
+          <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Absolutely. SiteBuilder is a fully no-code website builder, so you never need to write a single line of
+              code to create a professional website. You can drag and drop sections, edit text and images, adjust
+              colors, and customize layouts visually—everything happens directly on the page. If you want more advanced
+              customization, you can still add code blocks or custom scripts, but it's completely optional.
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+              What makes a good website?
+            </button>
+          </h2>
+          <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              A good website combines clear purpose, strong structure, compelling content, consistent design, and clear
+              calls-to-action. SiteBuilder helps you with structure and design, and AI can draft your content — but your
+              understanding of your audience is what turns a good site into a great one.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="text-white" style="background: radial-gradient(circle at center, #6d28d9, #000 70%);">
+    <div class="container px-5">
+      <div class="row">
+        <div class="col-6 col-lg-4">
+          <h3 class="fw-bold">SiteBuilder</h3>
+          <p class="pt-2">Turn your ideas into stunning websites in seconds — no code, no limits, just AI.</p>
+          <p class="pt-2">STAY IN THE LOOP</p>
+          <p class="mb-2">0987654321</p>
+          <p>1234567890</p>
+        </div>
+        <div class="col">
+          <h4>Menu</h4>
+          <ul class="list-unstyled pt-2">
+            <li class="py-1"><a class="nav-link" href="landingpage.html">Home</a></li>
+            <li class="py-1"><a class="nav-link" href="community.html">Community</a></li>
+            <li class="py-1"><a class="nav-link" href="Aboutus.html">About Us</a></li>
+            <li class="py-1"><a class="nav-link" href="pricing.html">Pricing</a></li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>Company</h4>
+          <ul class="list-unstyled pt-2">
+            <li class="py-1"><a class="nav-link" href="Aboutus.html">About Us</a></li>
+            <li class="py-1"><a class="nav-link" href="#">Careers</a></li>
+            <li class="py-1"><a class="nav-link" href="#">Partners</a></li>
+            <li class="py-1"><a class="nav-link" href="#">Consulting</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-3 text-lg-end">
+          <h4>Social Media Links</h4>
+          <div class="social-media pt-2">
+            <a href="#" class="text-light fs-2 me-3"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-light fs-2 me-3"><i class="bi bi-pinterest"></i></a>
+            <a href="#" class="text-light fs-2 me-3"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/krishna-paralkar-0497003bb/" class="text-light fs-2"><i
+                class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="d-sm-flex justify-content-between py-1">
+        <p>2026 &copy; SiteBuilder. All Rights Reserved.</p>
+        <p>
+          <a href="#" class="text-light text-decoration-none pe-4">Terms of use</a>
+          <a href="#" class="text-light text-decoration-none">Privacy policy</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="auth.js"></script>
+  <script>updateNavForAuth();</script>
+</body>
+
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | SiteBuilder</title>
+  <meta name="description" content="Create a SiteBuilder account to start building AI-powered websites." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="signup.css" />
+
+  <style>
+    .navbar-custom {
+      background: #1e1730;
+      padding: 0.85rem 2rem;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff !important;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .brand-icon {
+      color: #f5a623;
+      font-size: 18px;
+    }
+
+    .navbar-custom .nav-link {
+      color: rgba(255, 255, 255, 0.75) !important;
+      font-size: 15px;
+      font-weight: 400;
+      padding: 0.4rem 1rem !important;
+      transition: color 0.2s;
+    }
+
+    .navbar-custom .nav-link:hover,
+    .navbar-custom .nav-link.active {
+      color: #ffffff !important;
+    }
+
+    .btn-get-started {
+      background: #7c4dff;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 9px 24px;
+      border-radius: 8px;
+      border: none;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-get-started:hover {
+      background: #9166ff;
+      color: #fff;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255,255,255,0.2);
+    }
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    .auth-message {
+      display: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .auth-message.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+
+    .auth-message.success {
+      display: block;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #86efac;
+    }
+
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand" href="landingpage.html">
+        <span class="brand-icon">⚡</span>
+        SiteBuilder
+      </a>
+
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="landingpage.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">My Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="community.html">Community</a></li>
+          <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link" href="Aboutus.html">About Us</a></li>
+        </ul>
+      </div>
+
+      <a href="login.html" class="btn-get-started d-none d-lg-block">Get started</a>
+    </div>
+  </nav>
+
+  <main class="auth-wrapper">
+    <div class="auth-card">
+      <h2>Create an account</h2>
+      <p class="subtitle">Enter your details below to create your account</p>
+
+      <div id="authMessage" class="auth-message" role="alert"></div>
+
+      <form id="signupForm">
+        <label for="signupName">Full Name</label>
+        <input type="text" id="signupName" placeholder="John Doe" required />
+
+        <label for="signupEmail">Email</label>
+        <input type="email" id="signupEmail" placeholder="m@example.com" required />
+
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" placeholder="Create a password" required minlength="6" />
+
+        <label for="signupConfirmPassword">Confirm Password</label>
+        <input type="password" id="signupConfirmPassword" placeholder="Confirm password" required minlength="6" />
+
+        <button type="submit" id="signupBtn">Create Account</button>
+      </form>
+
+      <p class="signup-text">
+        Already have an account?
+        <a href="login.html">Sign In</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="auth.js"></script>
+  <script>
+    redirectIfAuthenticated();
+
+    function showMessage(text, type) {
+      const el = document.getElementById('authMessage');
+      el.textContent = text;
+      el.className = type ? 'auth-message ' + type : 'auth-message';
+    }
+
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value;
+      const confirmPassword = document.getElementById('signupConfirmPassword').value;
+      const btn = document.getElementById('signupBtn');
+      let success = false;
+
+      if (password !== confirmPassword) {
+        showMessage('Passwords do not match.', 'error');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Creating account...';
+      showMessage('', '');
+
+      try {
+        const response = await fetch(`${API_BASE}/api/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          showMessage(data.error || 'Sign up failed.', 'error');
+          return;
+        }
+
+        setSession({ id: data.id, name: data.name, email: data.email }, data.token);
+        success = true;
+        showMessage('Account created! Redirecting...', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 800);
+      } catch (err) {
+        showMessage('Could not connect to the server. Make sure the backend is running on port 5500.', 'error');
+      } finally {
+        if (!success) {
+          btn.disabled = false;
+          btn.textContent = 'Create Account';
+        }
+      }
+    });
+  </script>
+</body>
+</html>

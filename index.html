@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Website Creator</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at center, #6d28d9, #000 70%);
+            color: #fff;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ANIMATED BACKGROUND GLOW */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -50%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.35), transparent 60%);
+            animation: glowMove 12s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes glowMove {
+            0% {
+                transform: translate(-10%, -10%);
+            }
+
+            50% {
+                transform: translate(10%, 10%);
+            }
+
+            100% {
+                transform: translate(-10%, -10%);
+            }
+        }
+
+        /* NAVBAR */
+        .navbar-custom {
+            background: #1e1730;
+            padding: 0.85rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff !important;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .brand-icon {
+            color: #f5a623;
+            font-size: 18px;
+        }
+
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.75) !important;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 0.4rem 1rem !important;
+            transition: color 0.2s;
+        }
+
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: #ffffff !important;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .prompt-container {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: 30px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #a855f7;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+        }
+
+        button.generate-btn {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 12px 30px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        button.generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.6);
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .preview-tabs {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .preview-tab {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .preview-tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .preview-tab.active {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            border-color: #a855f7;
+        }
+
+        .code-preview {
+            display: none;
+            width: 100%;
+            height: 600px;
+            background: #1e1e1e;
+            border: 2px solid #45475a;
+            border-radius: 8px;
+            padding: 15px;
+            overflow: auto;
+            color: #d4d4d4;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .code-preview.show {
+            display: block;
+        }
+
+        .preview-iframe {
+            display: block;
+        }
+
+        .preview-iframe.hidden {
+            display: none;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #45475a;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .preview-error {
+            display: none;
+            background: rgba(255, 100, 100, 0.1);
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 15px;
+            color: #ff6b6b;
+        }
+
+        .preview-error.show {
+            display: block;
+        }
+
+        .loader {
+            display: none;
+            margin-top: 15px;
+            color: #a6e3a1;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .loader-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(166, 227, 161, 0.3);
+            border-radius: 50%;
+            border-top-color: #a6e3a1;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .retry-btn {
+            background: rgba(255, 100, 100, 0.2);
+            border: 1px solid rgba(255, 100, 100, 0.4);
+            color: #ff6b6b;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .retry-btn:hover {
+            background: rgba(255, 100, 100, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid px-3">
+            <a class="navbar-brand" href="#">
+                <span class="brand-icon">⚡</span>
+                SiteBuilder
+            </a>
+
+            <div class="d-flex ms-auto align-items-center gap-3">
+                <span id="userGreeting" class="nav-link text-white text-decoration-none mb-0"></span>
+                <a href="projects.html" class="nav-link text-white text-decoration-none">My Projects</a>
+                <a href="#" onclick="logout(); return false;" class="nav-link text-white text-decoration-none">Logout</a>
+                <a href="landingpage.html" class="nav-link text-white text-decoration-none">Exit Editor</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="header-section">
+            <h1>AI Website Creator</h1>
+            <p>Describe your website, and the AI will code and render it instantly.</p>
+        </div>
+
+        <div class="prompt-container">
+            <textarea id="promptInput"
+                placeholder="e.g., Create a modern landing page for a bakery with a dark theme, a hero section, and a contact form..."></textarea>
+            <button class="generate-btn" onclick="generateSite()">Generate Website</button>
+            <div id="loader" class="loader">
+                <span class="loader-spinner"></span>
+                AI is writing the code... please wait.
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <div class="preview-header">
+                <h2>Live Preview</h2>
+                <div class="preview-tabs">
+                    <button class="preview-tab active" onclick="switchTab('preview')">Preview</button>
+                    <button class="preview-tab" onclick="switchTab('code')">Code</button>
+                    <button class="copy-btn" onclick="copyCode()">📋 Copy Code</button>
+                </div>
+            </div>
+            <iframe id="previewWindow" class="preview-iframe" title="Website Preview" sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups"></iframe>
+            <div id="codePreview" class="code-preview"></div>
+            <div id="previewError" class="preview-error">
+                <strong>Preview Error:</strong> <span id="errorMessage"></span>
+                <button class="retry-btn" onclick="generateSite()">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        function switchTab(tab) {
+            const previewTab = document.querySelector('.preview-tab:nth-child(1)');
+            const codeTab = document.querySelector('.preview-tab:nth-child(2)');
+            const previewWindow = document.getElementById('previewWindow');
+            const codePreview = document.getElementById('codePreview');
+
+            if (tab === 'preview') {
+                previewTab.classList.add('active');
+                codeTab.classList.remove('active');
+                previewWindow.classList.remove('hidden');
+                codePreview.classList.remove('show');
+            } else {
+                previewTab.classList.remove('active');
+                codeTab.classList.add('active');
+                previewWindow.classList.add('hidden');
+                codePreview.classList.add('show');
+            }
+        }
+
+        function copyCode() {
+            const codePreview = document.getElementById('codePreview');
+            const code = codePreview.textContent;
+            
+            if (!code) {
+                alert('No code to copy. Generate a website first.');
+                return;
+            }
+
+            navigator.clipboard.writeText(code).then(() => {
+                const copyBtn = document.querySelector('.copy-btn');
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy code: ' + err.message);
+            });
+        }
+
+        function setPreviewContent(html) {
+            const iframe = document.getElementById('previewWindow');
+            const codePreview = document.getElementById('codePreview');
+            const errorDiv = document.getElementById('previewError');
+            
+            try {
+                // Clear previous error
+                errorDiv.classList.remove('show');
+                
+                // Set the iframe content
+                iframe.srcdoc = html;
+                
+                // Set the code preview content
+                codePreview.textContent = html;
+                
+                // Handle iframe load errors
+                iframe.onerror = function() {
+                    showPreviewError('Failed to render preview. The generated code may contain errors.');
+                };
+                
+                // Add load event listener to detect rendering issues
+                iframe.onload = function() {
+                    try {
+                        // Try to access the iframe content to check if it loaded
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        if (!iframeDoc || iframeDoc.title === 'Error') {
+                            showPreviewError('Preview rendering failed. Check the generated code.');
+                        }
+                    } catch (e) {
+                        // Cross-origin or sandbox restriction - this is expected
+                        console.log('Iframe loaded with sandbox restrictions');
+                    }
+                };
+            } catch (e) {
+                showPreviewError('Failed to set preview: ' + e.message);
+            }
+        }
+
+        function showPreviewError(message) {
+            const errorDiv = document.getElementById('previewError');
+            const errorSpan = document.getElementById('errorMessage');
+            errorSpan.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        async function generateSite() {
+            const prompt = document.getElementById('promptInput').value;
+            if (!prompt) return alert('Please enter a description first.');
+
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('previewWindow').srcdoc = '';
+            document.getElementById('previewError').classList.remove('show');
+
+            try {
+                const response = await authFetch('/api/generate', {
+                    method: 'POST',
+                    body: JSON.stringify({ prompt })
+                });
+
+                const data = await response.json();
+
+                if (data.code) {
+                    setPreviewContent(data.code);
+                } else {
+                    showPreviewError('Error: ' + (data.error || 'Unknown error occurred'));
+                }
+            } catch (err) {
+                if (err.message !== 'Session expired') {
+                    console.error(err);
+                    showPreviewError('Failed to connect to the backend server. Make sure the Node.js backend (server.js) is running on port 5500.');
+                }
+            } finally {
+                document.getElementById('loader').style.display = 'none';
+            }
+        }
+
+        (async () => {
+            const user = await initAuth();
+            if (!user) return;
+
+            document.getElementById('userGreeting').textContent = `Hi, ${user.name.split(' ')[0]}`;
+
+            async function loadProjectFromUrl() {
+                const params = new URLSearchParams(window.location.search);
+                const projectId = params.get('project');
+                if (!projectId) return;
+
+                try {
+                    const response = await authFetch(`/api/projects/${projectId}`);
+                    const project = await response.json();
+                    if (project.code) {
+                        setPreviewContent(project.code);
+                        document.getElementById('promptInput').value = project.prompt || '';
+                    }
+                } catch (err) {
+                    if (err.message !== 'Session expired') {
+                        console.error(err);
+                        showPreviewError('Failed to load project: ' + err.message);
+                    }
+                }
+            }
+
+            loadProjectFromUrl();
+        })();
+    </script>
+</body>
+
+</html>

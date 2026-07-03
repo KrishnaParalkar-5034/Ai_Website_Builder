@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | AI Website Creator</title>
+  <meta name="description"
+    content="Learn about AI Website Creator, an agile, full-stack prototyping engine bridging the gap between imagination and live source code.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-glow: rgba(124, 58, 237, 0.5);
+      --secondary: #f5a623;
+      --dark-bg: #0b0f19;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-main);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Background Glows */
+    body::before,
+    body::after {
+      content: '';
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: -1;
+      animation: floatAmbient 20s infinite alternate ease-in-out;
+    }
+
+    body::before {
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.15), transparent 70%);
+      top: -10%;
+      left: -10%;
+    }
+
+    body::after {
+      background: radial-gradient(circle, rgba(245, 166, 35, 0.1), transparent 70%);
+      bottom: -20%;
+      right: -10%;
+      animation-delay: -5s;
+    }
+
+    @keyframes floatAmbient {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(100px, 50px);
+      }
+    }
+
+    /* Navbar Styles */
+    .navbar-custom {
+      background: rgba(11, 15, 25, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff !important;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-icon {
+      color: var(--secondary);
+      font-size: 1.5rem;
+      filter: drop-shadow(0 0 8px rgba(245, 166, 35, 0.4));
+    }
+
+    .navbar-custom .nav-link {
+      color: var(--text-muted) !important;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.5rem 1.2rem !important;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .navbar-custom .nav-link:hover,
+    .navbar-custom .nav-link.active {
+      color: #fff !important;
+    }
+
+    .navbar-custom .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .navbar-custom .nav-link:hover::after,
+    .navbar-custom .nav-link.active::after {
+      width: 70%;
+    }
+
+    .btn-get-started {
+      background: linear-gradient(135deg, var(--primary), #a855f7);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    .btn-get-started:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--primary-glow);
+      color: #fff;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* Main Content */
+    .page-wrapper {
+      padding-top: 100px;
+      /* Account for fixed navbar */
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 6rem 0 4rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124, 58, 237, 0.1);
+      border: 1px solid rgba(124, 58, 237, 0.2);
+      color: #c4b5fd;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #a855f7, #6366f1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    /* Content Cards */
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      height: 100%;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.02), transparent);
+      transform: skewX(-20deg);
+      transition: 0.5s;
+    }
+
+    .glass-card:hover::before {
+      left: 150%;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(124, 58, 237, 0.1);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .card-icon-wrapper {
+      width: 50px;
+      height: 50px;
+      background: rgba(124, 58, 237, 0.1);
+      border: 1px solid rgba(124, 58, 237, 0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      color: #a855f7;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .card-text {
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+
+    /* Tech Stack Section */
+    .tech-stack-section {
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .tech-badge {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      cursor: default;
+    }
+
+    .tech-badge:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .tech-icon {
+      font-size: 2.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .tech-badge:hover .tech-icon {
+      transform: scale(1.15);
+    }
+
+    .tech-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+    }
+
+    .tech-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: -5px;
+    }
+
+    /* Specific Tech Colors on Hover */
+    .tech-badge.html:hover {
+      border-color: rgba(227, 79, 38, 0.5);
+      box-shadow: 0 10px 25px rgba(227, 79, 38, 0.15);
+    }
+
+    .tech-badge.css:hover {
+      border-color: rgba(21, 114, 182, 0.5);
+      box-shadow: 0 10px 25px rgba(21, 114, 182, 0.15);
+    }
+
+    .tech-badge.js:hover {
+      border-color: rgba(247, 223, 30, 0.5);
+      box-shadow: 0 10px 25px rgba(247, 223, 30, 0.15);
+    }
+
+    .tech-badge.node:hover {
+      border-color: rgba(51, 153, 51, 0.5);
+      box-shadow: 0 10px 25px rgba(51, 153, 51, 0.15);
+    }
+
+    .tech-badge.sql:hover {
+      border-color: rgba(0, 117, 143, 0.5);
+      box-shadow: 0 10px 25px rgba(0, 117, 143, 0.15);
+    }
+
+    .tech-badge.ai:hover {
+      border-color: rgba(168, 85, 247, 0.5);
+      box-shadow: 0 10px 25px rgba(168, 85, 247, 0.15);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-section {
+        padding: 4rem 0 2rem;
+      }
+
+      .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid px-lg-4">
+      <a class="navbar-brand" href="landingpage.html">
+        <span class="brand-icon">⚡</span>
+        SiteBuilder
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="landingpage.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">My Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="community.html">Community</a></li>
+          <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link active" href="aboutus.html">About Us</a></li>
+        </ul>
+      </div>
+
+      <div class="d-none d-lg-block">
+        <a href="login.html" class="btn-get-started">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+    <!-- Hero Section -->
+    <section class="hero-section container">
+      <div class="badge-pill">
+        ✨ Engineer Portfolio / Placement Vibe
+      </div>
+      <h1 class="hero-title">About <span>SiteBuilder</span></h1>
+      <p class="hero-subtitle">
+        Welcome to AI Website Creator, an agile, full-stack prototyping engine designed to bridge the gap between
+        imagination and live source code.
+      </p>
+    </section>
+
+    <!-- Mission & How it Works Section -->
+    <section class="container mb-5">
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="glass-card" style="animation: fadeInUp 0.8s ease-out 0.6s both;">
+            <div class="card-icon-wrapper">
+              🚀
+            </div>
+            <h2 class="card-title">Our Mission</h2>
+            <p class="card-text">
+              Building local interfaces should not require wrestling with boilerplate syntax. Our platform empowers
+              developers, designers, and students to spin up structural wireframes, landing pages, and interactive UI
+              blocks instantly using plain-text descriptions.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="glass-card" style="animation: fadeInUp 0.8s ease-out 0.8s both;">
+            <div class="card-icon-wrapper">
+              ⚙️
+            </div>
+            <h2 class="card-title">How It Works</h2>
+            <p class="card-text">
+              Under the hood, this platform combines a clean frontend environment with a robust Node.js and asynchronous
+              execution layer. By leveraging the power of advanced Large Language Models via API, the system dynamically
+              generates fully unified HTML5, CSS3, and JavaScript code blocks, rendering them instantly in a secure
+              sandboxed sandbox while exposing the raw clean code architecture for immediate deployment.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Architecture / Tech Stack Section -->
+    <section class="tech-stack-section container">
+      <div class="section-header" style="animation: fadeInUp 0.8s ease-out 1s both;">
+        <h2 class="section-title">The Architecture Stack</h2>
+        <p class="section-subtitle">
+          Engineered from the ground up utilizing an industry-standard full-stack development matrix. Developed with
+          scalability in mind, this project serves as a showcase of clean API integration, secure data workflows, and
+          intuitive developer tool design.
+        </p>
+      </div>
+
+      <div class="tech-grid" style="animation: fadeInUp 0.8s ease-out 1.2s both;">
+        <!-- HTML5 -->
+        <div class="tech-badge html">
+          <div class="tech-icon" style="color: #e34f26;">📄</div>
+          <div>
+            <div class="tech-name">HTML5</div>
+            <div class="tech-desc">Semantic Core</div>
+          </div>
+        </div>
+
+        <!-- CSS3 -->
+        <div class="tech-badge css">
+          <div class="tech-icon" style="color: #1572b6;">🎨</div>
+          <div>
+            <div class="tech-name">CSS3</div>
+            <div class="tech-desc">Grid/Flexbox</div>
+          </div>
+        </div>
+
+        <!-- JavaScript -->
+        <div class="tech-badge js">
+          <div class="tech-icon" style="color: #f7df1e;">⚡</div>
+          <div>
+            <div class="tech-name">JavaScript</div>
+            <div class="tech-desc">Reactive UI</div>
+          </div>
+        </div>
+
+        <!-- Node.js -->
+        <div class="tech-badge node">
+          <div class="tech-icon" style="color: #339933;">🟢</div>
+          <div>
+            <div class="tech-name">Node.js</div>
+            <div class="tech-desc">Express Backend</div>
+          </div>
+        </div>
+
+        <!-- SQL Database -->
+        <div class="tech-badge sql">
+          <div class="tech-icon" style="color: #00758f;">🗄️</div>
+          <div>
+            <div class="tech-name">SQLite</div>
+            <div class="tech-desc">Data Persistence</div>
+          </div>
+        </div>
+
+        <!-- AI API -->
+        <div class="tech-badge ai">
+          <div class="tech-icon" style="color: #a855f7;">🧠</div>
+          <div>
+            <div class="tech-name">OpenRouter API</div>
+            <div class="tech-desc">AI Orchestration</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

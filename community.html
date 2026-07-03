@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community | SiteBuilder</title>
+  <meta name="description" content="Join the SiteBuilder community." />
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      color: #fff;
+      background: radial-gradient(circle at center, #6d28d9, #000 70%);
+      overflow-x: hidden;
+    }
+
+    /* ANIMATED BACKGROUND GLOW */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -50%;
+      background: radial-gradient(circle, rgba(168,85,247,0.35), transparent 60%);
+      animation: glowMove 12s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes glowMove {
+      0% { transform: translate(-10%, -10%); }
+      50% { transform: translate(10%, 10%); }
+      100% { transform: translate(-10%, -10%); }
+    }
+
+    /* NAVBAR */
+    .navbar-custom {
+      background: #1e1730;
+      padding: 0.85rem 2rem;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff !important;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .brand-icon {
+      color: #f5a623;
+      font-size: 18px;
+    }
+
+    .navbar-custom .nav-link {
+      color: rgba(255, 255, 255, 0.75) !important;
+      font-size: 15px;
+      font-weight: 400;
+      padding: 0.4rem 1rem !important;
+      transition: color 0.2s;
+    }
+
+    .navbar-custom .nav-link:hover,
+    .navbar-custom .nav-link.active {
+      color: #ffffff !important;
+    }
+
+    .btn-get-started {
+      background: #7c4dff;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 9px 24px;
+      border-radius: 8px;
+      border: none;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-get-started:hover {
+      background: #9166ff;
+      color: #fff;
+    }
+
+    .navbar-toggler {
+      border-color: rgba(255,255,255,0.2);
+    }
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    /* HERO / CONTENT */
+    .hero {
+      text-align: center;
+      padding: 110px 20px;
+      animation: floatIn 1.2s ease forwards;
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      line-height: 1.2;
+      max-width: 900px;
+      margin: auto auto 20px;
+      background: linear-gradient(180deg, #fff, #c7b9ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #cfcfcf;
+      max-width: 700px;
+      margin: auto auto 50px;
+    }
+    
+    .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+        font-weight: bold;
+    }
+
+    /* Project Cards */
+    .card-group {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 80px;
+    }
+    
+    .card-group .card {
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.15);
+        overflow: hidden;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+    }
+    
+    .card-group .card-body {
+        padding: 24px;
+        background: transparent;
+    }
+    
+    .card-group .card-title {
+        color: #fff;
+        margin-bottom: 12px;
+        font-weight: 600;
+    }
+    
+    .card-group .card-text {
+        color: rgba(255,255,255,0.7);
+        margin-bottom: 20px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+      .card-group {
+          flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand" href="#">
+        <span class="brand-icon">⚡</span>
+        SiteBuilder
+      </a>
+
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="landingpage.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">My Projects</a></li>
+          <li class="nav-item"><a class="nav-link active" href="community.html">Community</a></li>
+          <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link" href="Aboutus.html">About Us</a></li>
+        </ul>
+      </div>
+
+      <a href="login.html" class="btn-get-started d-none d-lg-block">Get started</a>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <section class="hero">
+    <h1>Community Showcase</h1>
+    <p>See what others have built using SiteBuilder.</p>
+  </section>
+
+  <div class="container">
+      <h2 class="text-white section-title">Published Projects</h2>
+    
+      <div class="card-group">
+        <div class="card">
+          <img src="landing.jpg" class="card-img-top" alt="Portfolio Preview" onerror="this.src='https://via.placeholder.com/400x250?text=Portfolio'">
+          <div class="card-body">
+            <h5 class="card-title">Portfolio Website</h5>
+            <p class="card-text">Showcase your work and skills in a professional manner.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> 
+            <a href="#" class="btn btn-primary" style="background: linear-gradient(135deg, #7c3aed, #a855f7); border: none;">View Website</a>
+          </div>
+        </div>
+        
+        <div class="card">
+          <img src="E-commerce.jpg" class="card-img-top" alt="E-commerce Preview" onerror="this.src='https://via.placeholder.com/400x250?text=E-Commerce'">
+          <div class="card-body">
+            <h5 class="card-title">E-Commerce Website</h5>
+            <p class="card-text">Simple E-Commerce website using html, css, javascript</p>
+            <p class="card-text"><small class="text-muted">Last updated 1 hour ago</small></p>
+            <a href="#" class="btn btn-primary" style="background: linear-gradient(135deg, #7c3aed, #a855f7); border: none;">View Website</a>
+          </div>
+        </div>
+        
+        <div class="card">
+          <img src="company.jpg" class="card-img-top" alt="Landing Page Preview" onerror="this.src='https://via.placeholder.com/400x250?text=Landing+Page'">
+          <div class="card-body">
+            <h5 class="card-title">Landing Page</h5>
+            <p class="card-text">Professional landing page for a business or product.</p>
+            <p class="card-text"><small class="text-muted">Last updated 2 days ago</small></p>
+            <a href="#" class="btn btn-primary" style="background: linear-gradient(135deg, #7c3aed, #a855f7); border: none;">View Website</a>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="text-white" style="background: radial-gradient(circle at center, #6d28d9, #000 70%);">
+    <div class="container px-5">
+        <div class="row">
+            <div class="col-6 col-lg-4">
+                <h3 class="fw-bold">SiteBuilder</h3>
+                <p class="pt-2">Turn your ideas into stunning websites in seconds — no code, no limits, just AI.</p>
+                <p class="pt-2">STAY IN THE LOOP</p>
+                <p class="mb-2">0987654321</p>
+                <p>1234567890</p>
+            </div>
+            <div class="col">
+                <h4>Menu</h4>
+                <ul class="list-unstyled pt-2">
+                    <li class="py-1"><a class="nav-link" href="landingpage.html">Home</a></li>
+                    <li class="py-1"><a class="nav-link" href="community.html">Community</a></li>
+                    <li class="py-1"><a class="nav-link" href="Aboutus.html">About Us</a></li>
+                    <li class="py-1"><a class="nav-link" href="pricing.html">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h4>Company</h4>
+                <ul class="list-unstyled pt-2">
+                  <li class="py-1"><a class="nav-link" href="Aboutus.html">About Us</a></li>
+                    <li class="py-1"><a class="nav-link" href="#">Careers</a></li>
+                    <li class="py-1"><a class="nav-link" href="#">Partners</a></li>
+                    <li class="py-1"><a class="nav-link" href="#">Consulting</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-3 text-lg-end">
+                <h4>Social Media Links</h4>
+                <div class="social-media pt-2">
+                    <a href="#" class="text-light fs-2 me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-light fs-2 me-3"><i class="bi bi-pinterest"></i></a>
+                    <a href="#" class="text-light fs-2 me-3"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-light fs-2"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="d-sm-flex justify-content-between py-1">
+            <p>2026 &copy; SiteBuilder. All Rights Reserved.</p>
+            <p>
+                <a href="#" class="text-light text-decoration-none pe-4">Terms of use</a>
+                <a href="#" class="text-light text-decoration-none">Privacy policy</a>
+            </p>
+        </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
